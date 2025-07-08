@@ -1,5 +1,6 @@
 const upload = document.getElementById('upload');
 const resizeBtn = document.getElementById('resizeBtn');
+const resetBtn = document.getElementById('resetBtn');
 const widthInput = document.getElementById('width');
 const heightInput = document.getElementById('height');
 const canvas = document.getElementById('canvas');
@@ -45,4 +46,13 @@ resizeBtn.addEventListener('click', function () {
       <button>Download Image</button>
     </a>
   `;
+});
+
+resetBtn.addEventListener('click', function () {
+  upload.value = '';
+  widthInput.value = '';
+  heightInput.value = '';
+  canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
+  output.innerHTML = '';
+  originalImage = new Image();
 });
