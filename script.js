@@ -11,6 +11,7 @@ const dropZone = document.getElementById('drop_zone');
 const webcamBtn = document.getElementById('webcamBtn');
 const webcam = document.getElementById('webcam');
 const captureBtn = document.getElementById('captureBtn');
+const languageSelect = document.getElementById('languageSelect');
 
 
 let originalImage = new Image();
@@ -173,4 +174,28 @@ captureBtn.addEventListener('click', function () {
   captureBtn.style.display = 'none';
   webcamBtn.style.display = 'inline-block';
 });
+
+function updateLanguage(lang) {
+  document.querySelector('.container h1').textContent = translations[lang].title;
+  document.querySelector('label[for="width"]')?.childNodes[0] && (document.querySelector('label[for="width"]').childNodes[0].textContent = translations[lang].width + ' ');
+  document.querySelector('label[for="height"]')?.childNodes[0] && (document.querySelector('label[for="height"]').childNodes[0].textContent = translations[lang].height + ' ');
+  resizeBtn.textContent = translations[lang].resize;
+  resetBtn.textContent = translations[lang].reset;
+  // If output is showing a resized image, update its heading and button
+  if (output.innerHTML.includes('Resized Image') || output.innerHTML.includes('Imagen Redimensionada') || output.innerHTML.includes('Image Redimensionnée')) {
+    const img = output.querySelector('img');
+    const a = output.querySelector('a');
+    if (img && a) {
+      output.innerHTML = `<h3>${translations[lang].resizedImage}</h3>` + img.outerHTML + `<a href="${img.src}" download="resized-image.png"><button class="download-btn">${translations[lang].download}</button></a>`;
+    }
+  }
+}
+
+languageSelect.addEventListener('change', function() {
+  const lang = languageSelect.value;
+  updateLanguage(lang);
+});
+
+// Set initial language
+updateLanguage(languageSelect.value);
 
