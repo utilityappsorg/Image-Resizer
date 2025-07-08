@@ -19,6 +19,11 @@
     </div>
 
     
+    <!-- Add below your file input -->
+    <button id="webcamBtn">Take Photo from Webcam</button>
+    <video id="webcam" width="320" height="240" autoplay style="display:none;"></video>
+    <button id="captureBtn" style="display:none;">Capture Photo</button>
+
     <div class="controls">
       <label>
         Width:
@@ -31,6 +36,14 @@
       <button id="resizeBtn">Resize Image</button>
       <button id="resetBtn">Reset</button>
     </div>
+
+    <!-- Add this inside your .container div, above your controls -->
+    <select id="languageSelect">
+      <option value="en">English</option>
+      <option value="es">Español</option>
+      <option value="fr">Français</option>
+      <!-- Add more languages as needed -->
+    </select>
 
     <canvas id="canvas" style="display:none;"></canvas>
 
