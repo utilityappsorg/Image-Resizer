@@ -5,9 +5,13 @@ const widthInput = document.getElementById('width');
 const heightInput = document.getElementById('height');
 const canvas = document.getElementById('canvas');
 const output = document.getElementById('output');
+
+const dropZone = document.getElementById('drop_zone');
+
 const webcamBtn = document.getElementById('webcamBtn');
 const webcam = document.getElementById('webcam');
 const captureBtn = document.getElementById('captureBtn');
+
 
 let originalImage = new Image();
 let webcamStream = null;
@@ -95,6 +99,46 @@ resetBtn.addEventListener('click', function () {
   originalImage = new Image();
 });
 
+
+// Drag and drop functionality
+
+dropZone.addEventListener('dragover', function(ev) {
+  ev.preventDefault();
+  dropZone.style.backgroundColor = '#255acd';
+});
+
+dropZone.addEventListener('dragleave', function(ev) {
+  dropZone.style.backgroundColor = '#2563eb';
+});
+
+dropZone.addEventListener('drop', function(ev) {
+  ev.preventDefault();
+  dropZone.style.backgroundColor = '#2563eb';
+  let file;
+  if (ev.dataTransfer.items) {
+    for (let i = 0; i < ev.dataTransfer.items.length; i++) {
+      if (ev.dataTransfer.items[i].kind === 'file') {
+        file = ev.dataTransfer.items[i].getAsFile();
+        break;
+      }
+    }
+  } else if (ev.dataTransfer.files.length > 0) {
+    file = ev.dataTransfer.files[0];
+  }
+  if (file && file.type.startsWith('image/')) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      originalImage.src = e.target.result;
+      output.innerHTML = `<h3>Preview:</h3><img src="${e.target.result}" alt="Preview Image" style="max-width: 100%; display: block; margin: 0 auto 1rem auto;" />`;
+    };
+    reader.readAsDataURL(file);
+    upload.value = '';
+  } else {
+    alert('Please drop a valid image file.');
+  }
+});
+
+
 webcamBtn.addEventListener('click', async function () {
   if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     try {
@@ -129,3 +173,4 @@ captureBtn.addEventListener('click', function () {
   captureBtn.style.display = 'none';
   webcamBtn.style.display = 'inline-block';
 });
+
