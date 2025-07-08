@@ -8,6 +8,40 @@ const output = document.getElementById('output');
 
 let originalImage = new Image();
 
+const translations = {
+  en: {
+    title: "Image Resizer",
+    width: "Width:",
+    height: "Height:",
+    resize: "Resize Image",
+    reset: "Reset",
+    resizedImage: "Resized Image:",
+    download: "Download Image",
+    alert: "Please enter valid width and height!"
+  },
+  es: {
+    title: "Redimensionador de Imágenes",
+    width: "Ancho:",
+    height: "Alto:",
+    resize: "Redimensionar Imagen",
+    reset: "Restablecer",
+    resizedImage: "Imagen Redimensionada:",
+    download: "Descargar Imagen",
+    alert: "¡Por favor, introduce un ancho y alto válidos!"
+  },
+  fr: {
+    title: "Redimensionneur d'Image",
+    width: "Largeur:",
+    height: "Hauteur:",
+    resize: "Redimensionner l'image",
+    reset: "Réinitialiser",
+    resizedImage: "Image Redimensionnée:",
+    download: "Télécharger l'image",
+    alert: "Veuillez entrer une largeur et une hauteur valides !"
+  }
+  // Add more languages as needed
+};
+
 upload.addEventListener('change', function () {
   const file = upload.files[0];
   const reader = new FileReader();
@@ -26,7 +60,7 @@ resizeBtn.addEventListener('click', function () {
   const height = parseInt(heightInput.value);
 
   if (!width || !height || isNaN(width) || isNaN(height)) {
-    alert('Please enter valid width and height!');
+    alert(translations.en.alert);
     return;
   }
 
@@ -40,10 +74,10 @@ resizeBtn.addEventListener('click', function () {
   const resizedImageURL = canvas.toDataURL('image/png');
 
   output.innerHTML = `
-    <h3>Resized Image:</h3>
+    <h3>${translations.en.resizedImage}</h3>
     <img src="${resizedImageURL}" alt="Resized Image" style="max-width: 100%; display: block; margin: 0 auto 1rem auto;" />
     <a href="${resizedImageURL}" download="resized-image.png">
-      <button class="download-btn">Download Image</button>
+      <button class="download-btn">${translations.en.download}</button>
     </a>
   `;
 });
