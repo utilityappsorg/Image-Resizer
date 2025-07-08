@@ -12,6 +12,7 @@ body {
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 90px;
 }
 
 h1 {
@@ -50,4 +51,26 @@ button {
 .output {
   margin-top: 1rem;
   text-align: center;
+}
+
+.header {
+  background: #2563eb;
+  color: white;
+  padding: 1rem;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.footer {
+  background: #f3f4f6;
+  color: #333;
+  text-align: center;
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
