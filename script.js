@@ -26,7 +26,8 @@ const translations = {
     reset: "Reset",
     resizedImage: "Resized Image:",
     download: "Download Image",
-    alert: "Please enter valid width and height!"
+    alert: "Please enter valid width and height!",
+    dropzone: "OR...Drag one or more files to this drop zone."
   },
   es: {
     title: "Redimensionador de Imágenes",
@@ -36,7 +37,8 @@ const translations = {
     reset: "Restablecer",
     resizedImage: "Imagen Redimensionada:",
     download: "Descargar Imagen",
-    alert: "¡Por favor, introduce un ancho y alto válidos!"
+    alert: "¡Por favor, introduce un ancho y alto válidos!",
+    dropzone: "O...Arrastra uno o más archivos a esta zona de suelta."
   },
   fr: {
     title: "Redimensionneur d'Image",
@@ -46,7 +48,8 @@ const translations = {
     reset: "Réinitialiser",
     resizedImage: "Image Redimensionnée:",
     download: "Télécharger l'image",
-    alert: "Veuillez entrer une largeur et une hauteur valides !"
+    alert: "Veuillez entrer une largeur et une hauteur valides !",
+    dropzone: "OU...Glissez-déposez un ou plusieurs fichiers dans cette zone."
   }
   // Add more languages as needed
 };
@@ -181,6 +184,8 @@ function updateLanguage(lang) {
   document.querySelector('label[for="height"]')?.childNodes[0] && (document.querySelector('label[for="height"]').childNodes[0].textContent = translations[lang].height + ' ');
   resizeBtn.textContent = translations[lang].resize;
   resetBtn.textContent = translations[lang].reset;
+  // Update drop zone text
+  dropZone.querySelector('p').innerHTML = translations[lang].dropzone.replace('drop zone', '<i>drop zone</i>').replace('zona de suelta', '<i>zona de suelta</i>').replace('zone', '<i>zone</i>');
   // If output is showing a resized image, update its heading and button
   if (output.innerHTML.includes('Resized Image') || output.innerHTML.includes('Imagen Redimensionada') || output.innerHTML.includes('Image Redimensionnée')) {
     const img = output.querySelector('img');

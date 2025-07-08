@@ -39,6 +39,12 @@ h1 {
   cursor: pointer;
 }
 
+#drop_zone p {
+  color: white;
+  font-size: 16px;
+  text-align: center;
+}
+
 
 .controls {
   margin-top: 1rem;
