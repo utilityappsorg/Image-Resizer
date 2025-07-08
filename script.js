@@ -5,8 +5,12 @@ const widthInput = document.getElementById('width');
 const heightInput = document.getElementById('height');
 const canvas = document.getElementById('canvas');
 const output = document.getElementById('output');
+const webcamBtn = document.getElementById('webcamBtn');
+const webcam = document.getElementById('webcam');
+const captureBtn = document.getElementById('captureBtn');
 
 let originalImage = new Image();
+let webcamStream = null;
 
 const translations = {
   en: {
@@ -89,4 +93,39 @@ resetBtn.addEventListener('click', function () {
   canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
   output.innerHTML = '';
   originalImage = new Image();
+});
+
+webcamBtn.addEventListener('click', async function () {
+  if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+    try {
+      webcam.style.display = 'block';
+      captureBtn.style.display = 'inline-block';
+      webcamBtn.style.display = 'none';
+      webcamStream = await navigator.mediaDevices.getUserMedia({ video: true });
+      webcam.srcObject = webcamStream;
+    } catch (err) {
+      alert('Webcam access denied or not available.');
+    }
+  } else {
+    alert('Webcam not supported in this browser.');
+  }
+});
+
+captureBtn.addEventListener('click', function () {
+  // Draw the current video frame to the canvas
+  const ctx = canvas.getContext('2d');
+  canvas.width = webcam.videoWidth;
+  canvas.height = webcam.videoHeight;
+  ctx.drawImage(webcam, 0, 0, canvas.width, canvas.height);
+
+  // Convert canvas to image and set as originalImage
+  originalImage.src = canvas.toDataURL('image/png');
+
+  // Stop webcam
+  if (webcamStream) {
+    webcamStream.getTracks().forEach(track => track.stop());
+  }
+  webcam.style.display = 'none';
+  captureBtn.style.display = 'none';
+  webcamBtn.style.display = 'inline-block';
 });
