@@ -2,9 +2,10 @@ body {
   font-family: Arial, sans-serif;
   background: #f3f4f6;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: flex-start;
   align-items: center;
-  height: 100vh;
 }
 
 .container {
@@ -70,7 +71,7 @@ button {
   color: #333;
   text-align: center;
   padding: 1rem;
-  position: fixed;
-  bottom: 0;
   width: 100%;
+  margin-top: auto;
+  position: static;
 }

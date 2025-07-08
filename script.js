@@ -41,9 +41,9 @@ resizeBtn.addEventListener('click', function () {
 
   output.innerHTML = `
     <h3>Resized Image:</h3>
-    <img src="${resizedImageURL}" alt="Resized Image" style="max-width: 100%;" />
+    <img src="${resizedImageURL}" alt="Resized Image" style="max-width: 100%; display: block; margin: 0 auto 1rem auto;" />
     <a href="${resizedImageURL}" download="resized-image.png">
-      <button>Download Image</button>
+      <button class="download-btn">Download Image</button>
     </a>
   `;
 });
